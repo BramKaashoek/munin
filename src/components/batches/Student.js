@@ -32,10 +32,14 @@ export class Student extends PureComponent {
 
 
     return (
-      <div>
-        <img src={profilePicture} />
-        <h1> {name} </h1>
-        <h2>{`Batch #${batchNumber}`}</h2>
+      <article className="evaluation wrapper">
+      <header>
+          <img src={profilePicture} classname="profilePicture" />
+          <div className="studentDetails">
+            <h1> {name} </h1>
+            <h2>{`Batch #${batchNumber}`}</h2>
+          </div>
+        </header>
         <div className="pastEvaluations">
           {evaluations.map(this.renderPastEvaluations.bind(this))}
         </div>
@@ -48,7 +52,7 @@ export class Student extends PureComponent {
         <TextField
         hintText="Enter remark here..."
          />
-      </ div>
+      </ article>
     )
   }
 }

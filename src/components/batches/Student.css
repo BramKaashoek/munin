@@ -1,14 +1,21 @@
-div.pastEvaluations {
+article.evaluation header {
   display: flex;
   flex-direction: row; }
-  div.pastEvaluations .evaluationBox {
+  article.evaluation header .studentDetails {
+    margin-left: 2rem; }
+
+article.evaluation div.pastEvaluations {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem; }
+  article.evaluation div.pastEvaluations .evaluationBox {
     height: 20px;
     width: 20px;
     background-color: grey;
     margin-left: 0.1rem; }
-  div.pastEvaluations .color-0 {
+  article.evaluation div.pastEvaluations .color-0 {
     background-color: red; }
-  div.pastEvaluations .color-1 {
+  article.evaluation div.pastEvaluations .color-1 {
     background-color: orange; }
-  div.pastEvaluations .color-2 {
+  article.evaluation div.pastEvaluations .color-2 {
     background-color: green; }
