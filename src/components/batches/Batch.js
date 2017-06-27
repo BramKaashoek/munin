@@ -33,6 +33,8 @@ export class Batch extends PureComponent {
       endDate,
     } = this.props
 
+    if (!_id) return null
+
     return (
       <div className="students wrapper">
         <header>
@@ -56,4 +58,4 @@ const mapStateToProps = ({ batches }, { params }) => {
   return { ...batch }
 }
 
-export default connect(mapStateToProps, { fetchBatches })(Batch)
+export default connect(mapStateToProps, {fetchBatches})(Batch)

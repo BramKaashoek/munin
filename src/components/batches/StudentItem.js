@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import './StudentItem.css'
+import RaisedButton from 'material-ui/RaisedButton'
 
 export class StudentItem extends PureComponent {
   static propTypes = {
@@ -11,6 +12,7 @@ export class StudentItem extends PureComponent {
     profilePicture: PropTypes.string.isRequired,
     evaluations: PropTypes.array.isRequired
   }
+
   render(){
     const {
   _id,
@@ -23,10 +25,21 @@ export class StudentItem extends PureComponent {
       <Link to={`/batches/${_id}/students${_id}`}>
         <article className="student">
           <header>
-            <h1>  {`${name}`}  </h1>
+            <img className="studentPicture" src={profilePicture} />
+            <h1 className="studentName">  {`${name}`}  </h1>
+            <div className={`evaluationBox color-${evaluations[evaluations.length-1].color}`}  />
           </header>
           <main>
-
+            <RaisedButton
+            className="actionButton"
+            label="Edit Student"
+            primary={true}
+            />
+            <RaisedButton
+            className="actionButton"
+            label="Delete Student"
+            primary={true}
+            />
           </main>
         </article>
        </Link>

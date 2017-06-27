@@ -1,0 +1,40 @@
+.students.wrapper {
+  margin: 0 auto; }
+  .students.wrapper main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; }
+    @media (min-width: 1025px) {
+      .students.wrapper main {
+        max-width: 1260px;
+        flex-flow: row wrap; } }
+    @media (min-width: 769px) {
+      .students.wrapper main {
+        flex-flow: row wrap; } }
+  .students.wrapper > header {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    flex: 2 100%; }
+    @media (min-width: 1025px) {
+      .students.wrapper > header {
+        max-width: 1260px; }
+        .students.wrapper > header h1 {
+          padding: 0 30px;
+          text-align: center; } }
+  .students.wrapper .container {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; }
+    @media (min-width: 1025px) {
+      .students.wrapper .container {
+        max-width: 1260px;
+        display: flex;
+        padding: 0 30px;
+        flex-flow: row wrap; } }
+    @media (min-width: 769px) {
+      .students.wrapper .container {
+        display: flex;
+        flex-direction: column;
+        flex-flow: row wrap; } }

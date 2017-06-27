@@ -8,6 +8,11 @@ article.batch {
   margin: 1em .8em;
   background-color: #fff;
   padding: 2.2em; }
+  @media (min-width: 769px) {
+    article.batch {
+      margin: .8em;
+      min-width: calc(45% - 4.4rem);
+      flex-shrink: 1; } }
   article.batch header {
     text-align: center; }
   article.batch main {
