@@ -1,0 +1,7 @@
+.App {
+  display: flex;
+  flex-flow: row wrap; }
+
+a {
+  color: black;
+  text-decoration: none; }
