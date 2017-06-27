@@ -1,0 +1,52 @@
+//src/components/batches/StudentItem.sass
+@import "../../assets/styles/breakpoints.sass"
+
+article.student
+  flex: 1
+  border-radius: .1em
+  overflow: hidden
+  box-shadow: 0 1px 6px rgba(0,0,0,.117647),0 1px 4px rgba(0,0,0,.117647)
+  display: flex
+  flex-direction: column
+  margin: 1em .8em
+  background-color: #fff
+  padding: 2.2em
+
+  @include breakpoint($breakpoint-medium)
+      margin: .8em
+      min-width: calc(45% - 4.4rem)
+      flex-shrink: 1
+
+  header
+    display: flex
+
+    .studentName
+      margin-left: 4rem
+
+    .studentPicture
+      max-width: 50%
+
+    .evaluationBox
+      height: 20px
+      width: 20px
+      margin-top: 1.5rem
+      margin-left: 1rem
+      background-color: grey
+      border-radius: 50%
+
+    .color-0
+      background-color: red
+
+    .color-1
+      background-color: orange
+
+    .color-2
+      background-color: green
+
+  main
+    padding: 10px 0
+    min-width: calc(100% - 1.6rem)
+
+    .actionButton
+      margin-left: 0.5rem
+      align-self: flex-end
