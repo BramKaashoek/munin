@@ -20,3 +20,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 src/App.css src/index.css
+src/app.css src/App.css src/components/batches/BatchContainer.css src/components/batches/Batch.css src/components/batches/BatchItem.css src/components/batches/CreateBatchButton.css src/components/users/SignIn.css src/index.css
