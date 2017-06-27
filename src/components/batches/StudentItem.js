@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import './StudentItem.css'
+import { push } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
+import openStudent from '../../actions/batches/open-student'
+import './StudentItem.css'
 
 export class StudentItem extends PureComponent {
   static propTypes = {
@@ -13,17 +14,23 @@ export class StudentItem extends PureComponent {
     evaluations: PropTypes.array.isRequired
   }
 
+  handleOpen = () => {
+  const student = this.props
+  this.props.openStudent(this.props)
+}
+
   render(){
     const {
-  _id,
-  name,
-  profilePicture,
-  evaluations,
-} = this.props
+      _id,
+      name,
+      profilePicture,
+      evaluations,
+      batchId,
+      batchNumber,
+    } = this.props
 
     return(
-      <Link to={`/batches/${_id}/students${_id}`}>
-        <article className="student">
+        <article className="student" onClick={this.handleOpen.bind(this)}>
           <header>
             <img className="studentPicture" src={profilePicture} />
             <h1 className="studentName">  {`${name}`}  </h1>
@@ -31,23 +38,21 @@ export class StudentItem extends PureComponent {
           </header>
           <main>
             <RaisedButton
-            className="actionButton"
-            label="Edit Student"
-            primary={true}
+              className="actionButton"
+              label="Edit Student"
+              primary={true}
             />
             <RaisedButton
-            className="actionButton"
-            label="Delete Student"
-            primary={true}
+              className="actionButton"
+              label="Delete Student"
+              primary={true}
             />
           </main>
         </article>
-       </Link>
-
     )
   }
 }
 
 
 
-export default connect(null, {})(StudentItem)
+export default connect(null, {openStudent})(StudentItem)
