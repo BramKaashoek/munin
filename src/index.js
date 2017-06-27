@@ -11,6 +11,7 @@ import './index.css';
 
 import BatchesContainer from './components/batches/BatchesContainer'
 import Batch from './components/batches/Batch'
+import Student from './components/batches/Student'
 import SignIn from './components/users/SignIn'
 
 
@@ -23,6 +24,7 @@ ReactDOM.render(
         <IndexRoute component={BatchesContainer} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/batches/:batchId" component={Batch} />
+        <Route path="/batches/:batchId/students/:studentId" component={Student} />
         </Route>
       </Router>
   </Provider>,

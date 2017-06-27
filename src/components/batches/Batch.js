@@ -21,7 +21,7 @@ export class Batch extends PureComponent {
   }
 
   renderStudent(student, index){
-    return ( <StudentItem key={index} { ...student } /> )
+    return ( <StudentItem batchId={this.props._id} batchNumber={this.props.batchNumber} key={index} { ...student } /> )
   }
 
   render(){

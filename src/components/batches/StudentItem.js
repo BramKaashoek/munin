@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'react-router'
 import { Link } from 'react-router'
 import './StudentItem.css'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -13,17 +14,23 @@ export class StudentItem extends PureComponent {
     evaluations: PropTypes.array.isRequired
   }
 
+  linkToStudent(){
+    //this.push({})
+  }
+
   render(){
     const {
-  _id,
-  name,
-  profilePicture,
-  evaluations,
-} = this.props
+      _id,
+      name,
+      profilePicture,
+      evaluations,
+      batchId,
+      batchNumber,
+    } = this.props
 
     return(
-      <Link to={`/batches/${_id}/students${_id}`}>
-        <article className="student">
+      <Link to={`/batches/${batchId}/students/${_id}`} batchNumber={batchNumber}>
+        <article className="student" onClick={this.linkToStudent.bind(this)}>
           <header>
             <img className="studentPicture" src={profilePicture} />
             <h1 className="studentName">  {`${name}`}  </h1>
@@ -31,14 +38,14 @@ export class StudentItem extends PureComponent {
           </header>
           <main>
             <RaisedButton
-            className="actionButton"
-            label="Edit Student"
-            primary={true}
+              className="actionButton"
+              label="Edit Student"
+              primary={true}
             />
             <RaisedButton
-            className="actionButton"
-            label="Delete Student"
-            primary={true}
+              className="actionButton"
+              label="Delete Student"
+              primary={true}
             />
           </main>
         </article>
