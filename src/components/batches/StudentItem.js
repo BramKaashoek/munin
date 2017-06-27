@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { push } from 'react-router'
-import { Link } from 'react-router'
-import './StudentItem.css'
 import RaisedButton from 'material-ui/RaisedButton'
+import openStudent from '../../actions/batches/open-student'
+import './StudentItem.css'
 
 export class StudentItem extends PureComponent {
   static propTypes = {
@@ -14,9 +14,10 @@ export class StudentItem extends PureComponent {
     evaluations: PropTypes.array.isRequired
   }
 
-  linkToStudent(){
-    //this.push({})
-  }
+  handleOpen = () => {
+  const student = this.props
+  this.props.openStudent(this.props)
+}
 
   render(){
     const {
@@ -29,8 +30,7 @@ export class StudentItem extends PureComponent {
     } = this.props
 
     return(
-      <Link to={`/batches/${batchId}/students/${_id}`} batchNumber={batchNumber}>
-        <article className="student" onClick={this.linkToStudent.bind(this)}>
+        <article className="student" onClick={this.handleOpen.bind(this)}>
           <header>
             <img className="studentPicture" src={profilePicture} />
             <h1 className="studentName">  {`${name}`}  </h1>
@@ -49,12 +49,10 @@ export class StudentItem extends PureComponent {
             />
           </main>
         </article>
-       </Link>
-
     )
   }
 }
 
 
 
-export default connect(null, {})(StudentItem)
+export default connect(null, {openStudent})(StudentItem)
