@@ -35,7 +35,7 @@ export class Student extends PureComponent {
 
   updateColor(event){
     this.setState({
-      color: this.refs.color.value
+      color: event.target.id
     })
   }
 
@@ -45,6 +45,10 @@ export class Student extends PureComponent {
     })
   }
 
+  formatDate(date){
+  return date.getDate()  + "/" + (date.getMonth() + 1)  +  "/" + date.getFullYear();
+}
+
   updateRemarks(event){
     this.setState({
      remarks: event.target.value
@@ -52,15 +56,20 @@ export class Student extends PureComponent {
   }
 
   validate(evaluation) {
-    const { date, color, remark } = evaluation
+    const { date, color, remarks } = evaluation
+    console.log(color)
+    console.log(date)
+    console.log(remarks)
 
     let errors = {}
 
-    if (color <= 1 && ( evaluation === null || evaluation === "" )) errors.evaluation = "When the evaluation is orange or red remarks must be provided."
+    if (color <= 1 && ( remarks === undefined || remarks === ""  )) errors.remarks = "When the evaluation is orange or red remarks must be provided."
 
     this.setState({
       errors,
     })
+
+    return Object.keys(errors).length === 0
   }
 
   saveEvaluation() {
@@ -83,10 +92,11 @@ export class Student extends PureComponent {
       remarks,
     }
 
-    console.log(evaluation)
 
     if (this.validate(evaluation)) {
       //this.props.saveEvaluation(evaluation)
+      console.log("validated")
+      this.handleClose()
     }
   }
 
@@ -96,16 +106,16 @@ export class Student extends PureComponent {
 
   handleSave= () => {
     this.saveEvaluation()
-    this.handleClose()
+
   }
 
   handleSaveAndNext= () => {
-    this.handleClose()
+    this.saveEvaluation()
+
   }
 
   render(){
     if (this.props.openStudent === null) return (null)
-
 
     const {
       _id,
@@ -115,9 +125,8 @@ export class Student extends PureComponent {
       batchNumber
     } = this.props.openStudent
 
-
-    const { errors } = this.state
-    return (
+    const { errors, color } = this.state
+     return (
       <article className="evaluation wrapper">
         <header>
           <img src={profilePicture} className="profilePicture" />
@@ -129,41 +138,49 @@ export class Student extends PureComponent {
         <div className="pastEvaluations">
           {evaluations.map(this.renderPastEvaluations.bind(this))}
         </div>
-        <div className="currentEvaluation">
-          <div className="colorSelect">
+        <div className="evaluationForm">
+          <div className="currentEvaluation">
+            <div className="colorSelect">
+            <div id="2" className={"colorSelectBox greenBox " + (color==="2" ? "color-2" : "") } onClick={this.updateColor.bind(this)}/>
+            <div id="1" className={"colorSelectBox orangeBox " + (color==="1" ? "color-1" : "")} onClick={this.updateColor.bind(this)}/>
+            <div id="0" className={"colorSelectBox redBox " + (color==="0" ? "color-0" : "")} onClick={this.updateColor.bind(this)}/>
+            </div>
+            <div className="inputfields">
+              <div className="dateSelect">
+                <p>Daily evaluation for </p>
+                <DatePicker
+                  className="datePicker"
+                  formatDate={this.formatDate}
+                  hintText="Today"
+                  onChange={this.updateDate.bind(this)}
+                />
+              </ div>
+              <TextField
+              className="remarks"
+              value={this.state.remarks}
+              hintText="Enter remarks here..."
+              multiLine={true}
+              rows={4}
+              fullWidth={true}
+              onChange={this.updateRemarks.bind(this)}
+               />
+               { errors.remarks && <p className="error"> { errors.remarks } </p> }
+            </div>
           </div>
-          <div className="inputfields">
-            <div className="dateSelect">
-              <p>Daily evaluation for </p>
-              <DatePicker
-                className="datePicker"
-                hintText="Today"
-                onChange={this.updateDate.bind(this)}
-              />
-            </ div>
-            <TextField
-            className="remarks"
-            value={this.state.remarks}
-            hintText="Enter remark here..."
-            multiLine={true}
-            rows={4}
-            onChange={this.updateRemarks.bind(this)}
+           <div className="actionButtons">
+             <RaisedButton
+              className="saveButton"
+               label="Save"
+               primary={true}
+               onTouchTap={this.handleSave}
              />
-          </div>
-        </div>
-         <div className="actionButtons">
-           <RaisedButton
-            className="saveButton"
-             label="Save"
-             primary={true}
-             onTouchTap={this.handleSave}
-           />
-           <RaisedButton
-             className="saveButton"
-             label="Save and Next"
-             primary={true}
-             onTouchTap={this.handleSaveAndNext}
-           />
+             <RaisedButton
+               className="saveButton"
+               label="Save and Next"
+               primary={true}
+               onTouchTap={this.handleSaveAndNext}
+             />
+           </div>
          </div>
       </ article>
     )

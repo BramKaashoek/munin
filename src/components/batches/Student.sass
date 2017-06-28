@@ -29,33 +29,69 @@ article.evaluation
     .color-2
       background-color: green
 
-  div.currentEvaluation
+  div.evaluationForm
     margin-top: 1rem
     display: flex
-    flex-direction: row
+    flex-direction: column
+    border-color: #D3D3D3
+    border-width: 1px
+    border-style: solid
 
-    .inputfields
+    .currentEvaluation
       display: flex
-      flex-direction: column
+      flex-direction: row
 
-      .dateSelect
+      .colorSelect
         display: flex
-        flex-direction: row
-        justify-content: flex-end
+        flex-direction: column
+        justify-content: center
 
-        .datePicker
-          margin-left: 1rem
-          color: black
+        .colorSelectBox
+          width: 3rem
+          height: 3rem
+          margin: 0.2rem
 
-      .remarks
-        display:flex
-        flex-direction:row
-        justify-content: flex-end
+        .greenBox
+          background-color: #1a5a06
+        .color-2
+          background-color: green
 
-  div.actionButtons
-    display: flex
-    flex-direction: row
-    justify-content: flex-end
+        .orangeBox
+          background-color: #ba980a
+        .color-1
+          background-color: orange
 
-    .saveButton
-      margin: 0.2rem 0.1rem 0rem 0.1rem
+        .redBox
+          background-color: #bf1414
+        .color-0
+          background-color: red
+
+      .inputfields
+        display: flex
+        flex-direction: column
+        margin-left: 2rem
+
+        .dateSelect
+          display: flex
+          flex-direction: row
+          justify-content: flex-end
+
+          .datePicker
+            margin-left: 1rem
+            color: black
+
+        .remarks
+          display:flex
+          flex-direction:row
+          justify-content: flex-end
+
+    div.actionButtons
+      display: flex
+      flex-direction: row
+      justify-content: flex-end
+
+      .saveButton
+        margin: 0.2rem 0.1rem 0rem 0.1rem
+
+.error
+  color: red

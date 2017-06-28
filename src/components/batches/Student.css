@@ -21,25 +21,55 @@ article.evaluation {
       background-color: orange; }
     article.evaluation div.pastEvaluations .color-2 {
       background-color: green; }
-  article.evaluation div.currentEvaluation {
+  article.evaluation div.evaluationForm {
     margin-top: 1rem;
     display: flex;
-    flex-direction: row; }
-    article.evaluation div.currentEvaluation .inputfields {
+    flex-direction: column;
+    border-color: #D3D3D3;
+    border-width: 1px;
+    border-style: solid; }
+    article.evaluation div.evaluationForm .currentEvaluation {
       display: flex;
-      flex-direction: column; }
-      article.evaluation div.currentEvaluation .inputfields .dateSelect {
+      flex-direction: row; }
+      article.evaluation div.evaluationForm .currentEvaluation .colorSelect {
         display: flex;
-        flex-direction: row;
-        justify-content: flex-end; }
-        article.evaluation div.currentEvaluation .inputfields .dateSelect .datePicker {
-          margin-left: 1rem;
-          color: black; }
-      article.evaluation div.currentEvaluation .inputfields .remarks {
-        justify-content: flex-end; }
-  article.evaluation div.actionButtons {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end; }
-    article.evaluation div.actionButtons .saveButton {
-      margin: 0.2rem 0.1rem 0rem 0.1rem; }
+        flex-direction: column;
+        justify-content: center; }
+        article.evaluation div.evaluationForm .currentEvaluation .colorSelect .colorSelectBox {
+          width: 3rem;
+          height: 3rem;
+          margin: 0.2rem; }
+        article.evaluation div.evaluationForm .currentEvaluation .colorSelect .greenBox {
+          background-color: #1a5a06; }
+        article.evaluation div.evaluationForm .currentEvaluation .colorSelect .color-2 {
+          background-color: green; }
+        article.evaluation div.evaluationForm .currentEvaluation .colorSelect .orangeBox {
+          background-color: #ba980a; }
+        article.evaluation div.evaluationForm .currentEvaluation .colorSelect .color-1 {
+          background-color: orange; }
+        article.evaluation div.evaluationForm .currentEvaluation .colorSelect .redBox {
+          background-color: #bf1414; }
+        article.evaluation div.evaluationForm .currentEvaluation .colorSelect .color-0 {
+          background-color: red; }
+      article.evaluation div.evaluationForm .currentEvaluation .inputfields {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2rem; }
+        article.evaluation div.evaluationForm .currentEvaluation .inputfields .dateSelect {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end; }
+          article.evaluation div.evaluationForm .currentEvaluation .inputfields .dateSelect .datePicker {
+            margin-left: 1rem;
+            color: black; }
+        article.evaluation div.evaluationForm .currentEvaluation .inputfields .remarks {
+          justify-content: flex-end; }
+    article.evaluation div.evaluationForm div.actionButtons {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end; }
+      article.evaluation div.evaluationForm div.actionButtons .saveButton {
+        margin: 0.2rem 0.1rem 0rem 0.1rem; }
+
+.error {
+  color: red; }
