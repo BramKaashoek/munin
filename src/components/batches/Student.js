@@ -1,8 +1,6 @@
 //src/components/batches/Batch.js
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import DatePicker from 'material-ui/DatePicker'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField';
@@ -19,13 +17,11 @@ export class Student extends PureComponent {
     this.state = {
       batchId,
       studentId,
-      date: new Date,
+      date,
       color,
       remarks,
       errors: {}
     }
-  }
-  static propTypes = {
   }
 
   renderPastEvaluations(evaluation){
@@ -57,7 +53,7 @@ export class Student extends PureComponent {
   }
 
   validate(evaluation) {
-    const { date, color, remarks } = evaluation
+    const { color, remarks } = evaluation
 
     let errors = {}
 
@@ -115,7 +111,6 @@ export class Student extends PureComponent {
     if (this.props.openStudent === null) return (null)
 
     const {
-      _id,
       name,
       profilePicture,
       evaluations,
@@ -126,7 +121,7 @@ export class Student extends PureComponent {
      return (
       <article className="evaluation wrapper">
         <header>
-          <img src={profilePicture} className="profilePicture" />
+          <img src={profilePicture} className="profilePicture" alt="students profile" />
           <div className="studentDetails">
             <h1> {name} </h1>
             <h2>{`Batch #${batchNumber}`}</h2>
