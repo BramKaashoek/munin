@@ -28,7 +28,7 @@ export class BatchItem extends PureComponent {
       <Link to={`/batches/${_id}`}>
       <article className="batch">
       <header>
-      <h1>  {`Batch ${batchNumber}`}  </h1>
+      <h1>  {`Batch #${batchNumber}`}  </h1>
       </header>
       <main>
       <p>{`${students.length} students`}</p>
