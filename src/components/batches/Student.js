@@ -17,7 +17,7 @@ export class Student extends PureComponent {
     this.state = {
       batchId,
       studentId,
-      date,
+      date: new Date,
       color,
       remarks,
       errors: {}
