@@ -32,8 +32,8 @@ export class BatchItem extends PureComponent {
       </header>
       <main>
       <p>{`${students.length} students`}</p>
-      <p>{`Start date: ${dateStartDate.getDate()} / ${dateStartDate.getMonth()} / ${dateStartDate.getFullYear()}`} </p>
-      <p>{`End date: ${dateEndDate.getDate()} / ${dateEndDate.getMonth()} / ${dateEndDate.getFullYear()}`} </p>
+      <p>{`Start date: ${dateStartDate.getDate()}/${dateStartDate.getMonth()}/${dateStartDate.getFullYear()}`} </p>
+      <p>{`End date: ${dateEndDate.getDate()}/${dateEndDate.getMonth()}/${dateEndDate.getFullYear()}`} </p>
       </main>
       </article>
       </Link>

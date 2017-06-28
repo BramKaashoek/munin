@@ -11,6 +11,9 @@ import closeStudent from '../../actions/batches/close-student'
 import Student from './Student'
 import './Batch.css'
 
+
+import DatePicker from 'material-ui/DatePicker'
+
 export class Batch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string.isRequired,
@@ -32,14 +35,6 @@ export class Batch extends PureComponent {
     this.props.closeStudent()
   }
 
-  handleSave= () => {
-    this.handleClose()
-  }
-
-  handleSaveAndNext= () => {
-    this.handleClose()
-  }
-
   render(){
     if (!this.props._id) return null
 
@@ -51,25 +46,10 @@ export class Batch extends PureComponent {
       endDate,
     } = this.props
 
-
-    const actions = [
-      <RaisedButton
-        label="Save"
-        primary={true}
-        onTouchTap={this.handleSave}
-      />,
-      <RaisedButton
-        label="Save and Next"
-        primary={true}
-        onTouchTap={this.handleSaveAndNext}
-      />
-    ]
-
     return (
       <div className="students wrapper">
       <Dialog
         title="Student Evaluation"
-        actions={actions}
         modal={false}
         open={(this.props.openStudent != null)}
         onRequestClose={this.handleClose}
@@ -82,6 +62,7 @@ export class Batch extends PureComponent {
         <main>
           { this.props.students.map(this.renderStudent.bind(this))}
         </main>
+        <DatePicker />
       </div>
     )
   }
