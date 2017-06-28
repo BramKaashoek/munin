@@ -2,7 +2,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import fetchBatches from '../../actions/batches/fetch'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
@@ -44,11 +43,8 @@ export class Batch extends PureComponent {
     if (!this.props._id) return null
 
     const {
-      _id,
       batchNumber,
       students,
-      startDate,
-      endDate,
     } = this.props
 
     return (
@@ -69,7 +65,7 @@ export class Batch extends PureComponent {
           />
         </header>
         <main>
-          { this.props.students.map(this.renderStudent.bind(this))}
+          { students.map(this.renderStudent.bind(this))}
         </main>
         <DatePicker />
       </div>
