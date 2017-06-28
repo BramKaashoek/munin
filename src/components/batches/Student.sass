@@ -1,4 +1,7 @@
 article.evaluation
+  display: flex
+  flex-direction: column
+
   header
     display: flex
     flex-direction: row
@@ -9,7 +12,7 @@ article.evaluation
   div.pastEvaluations
     display: flex
     flex-direction: row
-    margin-top: 1rem
+    margin-top: 2rem
 
     .evaluationBox
       height: 20px
@@ -25,3 +28,34 @@ article.evaluation
 
     .color-2
       background-color: green
+
+  div.currentEvaluation
+    margin-top: 1rem
+    display: flex
+    flex-direction: row
+
+    .inputfields
+      display: flex
+      flex-direction: column
+
+      .dateSelect
+        display: flex
+        flex-direction: row
+        justify-content: flex-end
+
+        .datePicker
+          margin-left: 1rem
+          color: black
+
+      .remarks
+        display:flex
+        flex-direction:row
+        justify-content: flex-end
+
+  div.actionButtons
+    display: flex
+    flex-direction: row
+    justify-content: flex-end
+
+    .saveButton
+      margin: 0.2rem 0.1rem 0rem 0.1rem
