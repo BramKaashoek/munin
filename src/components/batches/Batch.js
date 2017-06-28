@@ -9,6 +9,7 @@ import Dialog from 'material-ui/Dialog'
 import StudentItem from './StudentItem'
 import closeStudent from '../../actions/batches/close-student'
 import Student from './Student'
+import randomStudent from '../../actions/batches/random-student'
 import './Batch.css'
 
 
@@ -35,6 +36,10 @@ export class Batch extends PureComponent {
     this.props.closeStudent()
   }
 
+  randomStudent(){
+    this.props.randomStudent(this.props.students, this.props._id, this.props.batchNumber)
+  }
+
   render(){
     if (!this.props._id) return null
 
@@ -57,7 +62,11 @@ export class Batch extends PureComponent {
       <Student />
       </Dialog>
         <header>
-          <h1>{`Batch ${batchNumber}`}</h1>
+          <h1>{`Batch #${batchNumber}`}</h1>
+          <RaisedButton
+          label="Random Student"
+          onClick={this.randomStudent.bind(this)}
+          />
         </header>
         <main>
           { this.props.students.map(this.renderStudent.bind(this))}
@@ -78,4 +87,4 @@ const mapStateToProps = ({ batches, openStudent }, { params }) => {
   return { ...batch, openStudent }
 }
 
-export default connect(mapStateToProps, {fetchBatches, closeStudent})(Batch)
+export default connect(mapStateToProps, {fetchBatches, closeStudent, randomStudent})(Batch)
