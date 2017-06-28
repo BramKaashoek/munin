@@ -7,6 +7,7 @@ import DatePicker from 'material-ui/DatePicker'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField';
 import closeStudent from '../../actions/batches/close-student'
+import evaluationSave from '../../actions/batches/save-evaluation'
 import './Student.css'
 
 export class Student extends PureComponent {
@@ -57,9 +58,6 @@ export class Student extends PureComponent {
 
   validate(evaluation) {
     const { date, color, remarks } = evaluation
-    console.log(color)
-    console.log(date)
-    console.log(remarks)
 
     let errors = {}
 
@@ -94,8 +92,7 @@ export class Student extends PureComponent {
 
 
     if (this.validate(evaluation)) {
-      //this.props.saveEvaluation(evaluation)
-      console.log("validated")
+      this.props.evaluationSave(evaluation)
       this.handleClose()
     }
   }
@@ -189,4 +186,4 @@ export class Student extends PureComponent {
 
 const mapStateToProps= ({ openStudent } )=> ({ openStudent })
 
-export default connect(mapStateToProps, {closeStudent})(Student)
+export default connect(mapStateToProps, { closeStudent, evaluationSave })(Student)
