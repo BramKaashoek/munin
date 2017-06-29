@@ -52,13 +52,20 @@ export class Student extends PureComponent {
     })
   }
 
-  validate(evaluation) {
-    const { color, remarks } = evaluation
+  validate(evaluation, evaluations) {
+    const { color, remarks, date } = evaluation
 
     let errors = {}
 
-    if (color <= 1 && ( remarks === undefined || remarks === ""  )) errors.remarks = "When the evaluation is orange or red remarks must be provided."
-    if ( color === undefined || color === null ) errors.color = "A color must be selected"
+    const evaluationDates = evaluations.map((e) => {
+      const date = new Date(e.date)
+      return date.getDate()  + "/" + (date.getMonth() + 1)  +  "/" + date.getFullYear()
+    })
+    const formattedDate = this.formatDate(date)
+
+    if (evaluationDates.includes(formattedDate)) errors.date = "An evaluation has already been added for this date."
+    if ( color <= 1 && ( remarks === undefined || remarks === ""  )) errors.remarks = "When the evaluation is orange or red remarks must be provided."
+    if ( color === undefined || color === null ) errors.color = "A color must be selected."
     this.setState({
       errors,
     })
@@ -75,7 +82,8 @@ export class Student extends PureComponent {
 
     const {
       batchId,
-      _id
+      _id,
+      evaluations,
     } = this.props.openStudent
 
     const evaluation = {
@@ -86,7 +94,7 @@ export class Student extends PureComponent {
       remarks,
     }
 
-    if (this.validate(evaluation)) {
+    if (this.validate(evaluation, evaluations)) {
       this.props.evaluationSave(evaluation)
       if (nextStudent === true){
         this.setState({
@@ -155,6 +163,7 @@ export class Student extends PureComponent {
                   value={this.state.date}
                   onChange={this.updateDate.bind(this)}
                 />
+                { errors.date && <p className="error"> { errors.date } </p> }
               </ div>
               <TextField
               className="remarks"
