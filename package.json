@@ -9,6 +9,7 @@
     "feathers-hooks": "^2.0.1",
     "feathers-socketio": "^2.0.0",
     "material-ui": "^0.17.0",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

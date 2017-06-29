@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 import DatePicker from 'material-ui/DatePicker'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField';
+import moment from 'moment'
 import closeStudent from '../../actions/batches/close-student'
 import evaluationSave from '../../actions/batches/save-evaluation'
+
 import './Student.css'
 
 export class Student extends PureComponent {
@@ -21,6 +23,31 @@ export class Student extends PureComponent {
       color,
       remarks,
       errors: {}
+    }
+  }
+
+  componentWillMount(){
+    const today = new Date
+    const evaluation = this.getEvaluation(today)
+    this.setEvaluation(evaluation)
+  }
+
+  getEvaluation(searchDate){
+    const evaluations = this.props.openStudent.evaluations
+    return evaluations.find((e) => moment(e.date).format('DD/MM/YYYY') === moment(searchDate).format('DD/MM/YYYY')   )
+  }
+
+  setEvaluation(evaluation){
+    if (!!evaluation){
+      this.setState({
+        color: `${evaluation.color}`,
+        remarks: evaluation.remarks
+      })
+    } else {
+      this.setState({
+        color: null,
+        remarks: "",
+      })
     }
   }
 
@@ -40,10 +67,12 @@ export class Student extends PureComponent {
     this.setState({
       date: newDate
     })
+    const evaluation = this.getEvaluation(newDate)
+    this.setEvaluation(evaluation)
   }
 
   formatDate(date){
-  return date.getDate()  + "/" + (date.getMonth() + 1)  +  "/" + date.getFullYear();
+  return moment(date).format('DD/MM/YYYY')
 }
 
   updateRemarks(event){
@@ -59,11 +88,11 @@ export class Student extends PureComponent {
 
     const evaluationDates = evaluations.map((e) => {
       const date = new Date(e.date)
-      return date.getDate()  + "/" + (date.getMonth() + 1)  +  "/" + date.getFullYear()
+      return moment(date).format('DD/MM/YYYY')
     })
     const formattedDate = this.formatDate(date)
 
-    if (evaluationDates.includes(formattedDate)) errors.date = "An evaluation has already been added for this date."
+    //if (evaluationDates.includes(formattedDate)) errors.date = "An evaluation has already been added for this date."
     if ( color <= 1 && ( remarks === undefined || remarks === ""  )) errors.remarks = "When the evaluation is orange or red remarks must be provided."
     if ( color === undefined || color === null ) errors.color = "A color must be selected."
     this.setState({
