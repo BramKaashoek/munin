@@ -8,7 +8,7 @@ import {
   LOAD_SUCCESS
 } from '../loading/loading'
 
-export const SAVED_STUDENT = 'SAVED_STUDENT'
+export const EDITED_STUDENT = 'EDITED_STUDENT'
 
 const api = new API()
 
@@ -22,12 +22,12 @@ export default (newStudent) => {
       dispatch({ type: LOAD_SUCCESS })
 
       dispatch({ type: APP_LOADING })
-      backend.patch(newStudent.batchId, {addStudent: true, newStudent })
+      backend.patch(newStudent.batchId, {editStudent: true, newStudent })
       .then(() => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
         dispatch({
-          type: SAVED_STUDENT,
+          type: EDITED_STUDENT,
         })
       })
       .catch((error) => {

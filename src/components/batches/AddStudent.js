@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton'
 import createStudent from '../../actions/batches/create-student'
+import editStudent from '../../actions/batches/edit-student'
 
 export class AddStudent extends PureComponent {
   constructor(props) {
@@ -17,6 +18,22 @@ export class AddStudent extends PureComponent {
       name: "",
       profilePicture: "",
       errors: {},
+    }
+  }
+
+  componentWillMount(){
+    if (!!this.props.existingStudent){
+      this.setState({
+        name: this.props.existingStudent.name,
+        profilePicture: this.props.existingStudent.profilePicture,
+        evaluations: this.props.existingStudent.evaluations,
+        studentId: this.props.existingStudent._id
+      })
+    } else {
+      this.setState({
+        evaluations: [],
+        studentId: ""
+      })
     }
   }
 
@@ -40,15 +57,20 @@ export class AddStudent extends PureComponent {
     const {
       name,
       profilePicture,
+      evaluations,
+      studentId,
     } = this.state
 
     const batchId = this.props.batchId
 
     let errors = {}
+
     const newStudent= {
       name,
       profilePicture,
-      batchId
+      evaluations,
+      studentId,
+      batchId,
     }
 
     if ( name === ""  ) errors.name = "Please provide a name."
@@ -59,7 +81,11 @@ export class AddStudent extends PureComponent {
     })
 
     if (Object.keys(errors).length === 0){
-      this.props.createStudent(newStudent)
+      if (newStudent.studentId != ""){
+        this.props.editStudent(newStudent)
+      } else {
+        this.props.createStudent(newStudent)
+      }
       this.props.handleAddStudentClose()
     }
   }
@@ -94,4 +120,4 @@ export class AddStudent extends PureComponent {
     )}
 }
 
-export default connect(null, { createStudent })(AddStudent)
+export default connect(null, { createStudent, editStudent })(AddStudent)
