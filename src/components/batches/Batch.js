@@ -47,6 +47,14 @@ export class Batch extends PureComponent {
       students,
     } = this.props
 
+    const redTotal = students.reduce((prev, next) => { if (next.evaluations[next.evaluations.length -1 ].color === 0 ){ return prev + 1 } return prev }, 0)
+    const orangeTotal = students.reduce((prev, next) => { if (next.evaluations[next.evaluations.length -1 ].color === 1 ){ return prev + 1 } return prev }, 0)
+    const greenTotal = students.reduce((prev, next) => { if (next.evaluations[next.evaluations.length -1 ].color === 2 ){ return prev + 1 } return prev }, 0)
+
+    const redPercent = redTotal / (redTotal + orangeTotal + greenTotal) * 100
+    const orangePercent = orangeTotal / (redTotal + orangeTotal + greenTotal) * 100
+    const greenPercent = greenTotal / (redTotal + orangeTotal + greenTotal) * 100
+
     return (
       <div className="students wrapper">
       <Dialog
@@ -63,6 +71,11 @@ export class Batch extends PureComponent {
           label="Random Student"
           onClick={this.randomNextStudent.bind(this)}
           />
+          <div className="percentageBar">
+            <div className="red percentBox" style={{width: `${redPercent}%`}}>{redPercent}%</div>
+            <div className="orange percentBox" style={{width: `${orangePercent}%`}}>{orangePercent}%</div>
+            <div className="green percentBox" style={{width: `${greenPercent}%`}}>{greenPercent}%</div>
+          </div>
         </header>
         <main>
           { students.map(this.renderStudent.bind(this))}

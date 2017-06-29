@@ -23,6 +23,27 @@
     margin: 0 auto
     flex: 2 100%
 
+    .percentageBar
+      height: 20px
+      width: 50%
+      text-align: center
+      margin-top: 1rem
+      overflow: hidden
+
+      .percentBox
+        height: 20px
+        display: inline-block
+        
+
+      .red
+        background-color: red
+
+      .green
+        background-color: green
+
+      .orange
+        background-color: orange
+
     @include breakpoint($breakpoint-large)
       max-width: 1260px
 
