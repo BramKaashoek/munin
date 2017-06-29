@@ -35,7 +35,7 @@ export class Batch extends PureComponent {
     this.props.closeStudent()
   }
 
-  randomStudent(){
+  randomNextStudent(){
     this.props.randomStudent(this.props.students, this.props._id, this.props.batchNumber)
   }
 
@@ -55,13 +55,13 @@ export class Batch extends PureComponent {
         open={(this.props.openStudent != null)}
         onRequestClose={this.handleClose}
       >
-      <Student />
+      <Student randomStudent={this.randomNextStudent.bind(this)} />
       </Dialog>
         <header>
           <h1>{`Batch #${batchNumber}`}</h1>
           <RaisedButton
           label="Random Student"
-          onClick={this.randomStudent.bind(this)}
+          onClick={this.randomNextStudent.bind(this)}
           />
         </header>
         <main>
