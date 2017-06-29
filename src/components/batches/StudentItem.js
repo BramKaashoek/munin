@@ -29,12 +29,14 @@ export class StudentItem extends PureComponent {
       evaluations,
     } = this.props
 
+    const color = evaluations.length > 0 ? evaluations[evaluations.length-1].color : 99
+
     return(
         <article className="student" >
           <header onClick={this.handleOpen.bind(this)}>
             <img className="studentPicture" src={profilePicture} alt="students profile"/>
             <h1 className="studentName">  {`${name}`}  </h1>
-            <div className={`evaluationBox color-${evaluations[evaluations.length-1].color}`}  />
+           <div className={`evaluationBox color-${color}`}  />
           </header>
           <main>
             <RaisedButton
@@ -53,7 +55,5 @@ export class StudentItem extends PureComponent {
     )
   }
 }
-
-
 
 export default connect(null, {openStudent, deleteStudent })(StudentItem)
