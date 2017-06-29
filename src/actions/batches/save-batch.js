@@ -1,3 +1,4 @@
+//src/actions/batches/save-batch.js
 import API from '../../api'
 import {
   APP_LOADING,
@@ -6,29 +7,27 @@ import {
   LOAD_SUCCESS
 } from '../loading/loading'
 
-export const SAVED_EVALUATION = 'SAVED_EVALUATION'
+export const CREATED_BATCH = 'CREATED_BATCH'
 
 const api = new API()
 
-export default (evaluation) => {
+export default (newBatch, createNewBatch) => {
   return (dispatch) => {
     const backend = api.service('batches')
 
     dispatch({ type: APP_LOADING })
 
     api.app.authenticate()
-    .then(() => {
+    .then(()=>{
       dispatch({ type: APP_DONE_LOADING })
       dispatch({ type: LOAD_SUCCESS })
 
       dispatch({ type: APP_LOADING })
-      backend.patch(evaluation.batchId, { evaluation, newEvaluation: true },)
+      backend.create(newBatch)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-        dispatch({
-          type: SAVED_EVALUATION,
-        })
+        dispatch({ type: CREATED_BATCH })
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })
