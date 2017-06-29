@@ -58,7 +58,7 @@ export class Student extends PureComponent {
     let errors = {}
 
     if (color <= 1 && ( remarks === undefined || remarks === ""  )) errors.remarks = "When the evaluation is orange or red remarks must be provided."
-
+    if ( color === undefined || color === null ) errors.color = "A color must be selected"
     this.setState({
       errors,
     })
@@ -66,7 +66,7 @@ export class Student extends PureComponent {
     return Object.keys(errors).length === 0
   }
 
-  saveEvaluation() {
+  saveEvaluation(nextStudent) {
     const {
       date,
       color,
@@ -86,10 +86,18 @@ export class Student extends PureComponent {
       remarks,
     }
 
-
     if (this.validate(evaluation)) {
       this.props.evaluationSave(evaluation)
-      this.handleClose()
+      if (nextStudent === true){
+        this.setState({
+          date: new Date,
+          color: null,
+          remarks: "",
+        })
+        this.props.randomStudent()
+      } else {
+        this.handleClose()
+      }
     }
   }
 
@@ -98,13 +106,13 @@ export class Student extends PureComponent {
   }
 
   handleSave= () => {
-    this.saveEvaluation()
-
+    const nextStudent = false
+    this.saveEvaluation(nextStudent)
   }
 
   handleSaveAndNext= () => {
-    this.saveEvaluation()
-
+    const nextStudent = true
+    this.saveEvaluation(nextStudent)
   }
 
   render(){
@@ -144,6 +152,7 @@ export class Student extends PureComponent {
                   className="datePicker"
                   formatDate={this.formatDate}
                   hintText="Today"
+                  value={this.state.date}
                   onChange={this.updateDate.bind(this)}
                 />
               </ div>
@@ -157,6 +166,7 @@ export class Student extends PureComponent {
               onChange={this.updateRemarks.bind(this)}
                />
                { errors.remarks && <p className="error"> { errors.remarks } </p> }
+               { errors.color && <p className="error">  { errors.color } </p> }
             </div>
           </div>
            <div className="actionButtons">
