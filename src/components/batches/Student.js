@@ -167,6 +167,7 @@ export class Student extends PureComponent {
               </ div>
               <TextField
               className="remarks"
+              name="remarks"
               value={this.state.remarks}
               hintText="Enter remarks here..."
               multiLine={true}

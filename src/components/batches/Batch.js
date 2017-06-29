@@ -8,6 +8,7 @@ import Dialog from 'material-ui/Dialog'
 import StudentItem from './StudentItem'
 import closeStudent from '../../actions/batches/close-student'
 import Student from './Student'
+import AddStudent from './AddStudent'
 import randomStudent from '../../actions/batches/random-student'
 import './Batch.css'
 
@@ -15,6 +16,16 @@ import './Batch.css'
 import DatePicker from 'material-ui/DatePicker'
 
 export class Batch extends PureComponent {
+  constructor(props) {
+    super()
+
+    this.state = {
+      addStudent: false
+    }
+
+    this.handleAddStudentClose = this.handleAddStudentClose.bind(this)
+  }
+
   static propTypes = {
     _id: PropTypes.string.isRequired,
     batchNumber: PropTypes.number.isRequired,
@@ -39,6 +50,22 @@ export class Batch extends PureComponent {
     this.props.randomStudent(this.props.students, this.props._id, this.props.batchNumber)
   }
 
+  addNewStudent(){
+    this.props.addStudent()
+  }
+
+  handleAddStudentClose(){
+    this.setState({
+     addStudent: false
+    })
+  }
+
+  handleAddStudentOpen(){
+    this.setState({
+      addStudent: true
+    })
+  }
+
   render(){
     if (!this.props._id) return null
 
@@ -47,13 +74,13 @@ export class Batch extends PureComponent {
       students,
     } = this.props
 
-    const redTotal = students.reduce((prev, next) => { if (next.evaluations[next.evaluations.length -1 ].color === 0 ){ return prev + 1 } return prev }, 0)
-    const orangeTotal = students.reduce((prev, next) => { if (next.evaluations[next.evaluations.length -1 ].color === 1 ){ return prev + 1 } return prev }, 0)
-    const greenTotal = students.reduce((prev, next) => { if (next.evaluations[next.evaluations.length -1 ].color === 2 ){ return prev + 1 } return prev }, 0)
+    const redTotal = students.reduce((prev, next) => { if (next.evaluations.length > 0 && next.evaluations[next.evaluations.length -1 ].color === 0){ return prev + 1 } return prev }, 0)
+    const orangeTotal = students.reduce((prev, next) => { if (next.evaluations.length > 0 && next.evaluations[next.evaluations.length -1 ].color === 1 ){ return prev + 1 } return prev }, 0)
+    const greenTotal = students.reduce((prev, next) => { if (next.evaluations.length > 0 && next.evaluations[next.evaluations.length -1 ].color === 2 ){ return prev + 1 } return prev }, 0)
 
-    const redPercent = redTotal / (redTotal + orangeTotal + greenTotal) * 100
-    const orangePercent = orangeTotal / (redTotal + orangeTotal + greenTotal) * 100
-    const greenPercent = greenTotal / (redTotal + orangeTotal + greenTotal) * 100
+    const redPercent = Math.floor(redTotal / (redTotal + orangeTotal + greenTotal) * 100)
+    const orangePercent = Math.floor(orangeTotal / (redTotal + orangeTotal + greenTotal) * 100)
+    const greenPercent = Math.floor(greenTotal / (redTotal + orangeTotal + greenTotal) * 100)
 
     return (
       <div className="students wrapper">
@@ -79,8 +106,22 @@ export class Batch extends PureComponent {
         </header>
         <main>
           { students.map(this.renderStudent.bind(this))}
+          <div className="addStudent">
+            <RaisedButton
+            className="addStudentButton"
+            label="Add Student"
+            onTouchTap={this.handleAddStudentOpen.bind(this)}
+            />
+            <Dialog
+              title="Add Student"
+              modal={false}
+              open={this.state.addStudent}
+              onRequestClose={this.handleAddStudentClose.bind(this)}
+            >
+              <AddStudent batchId={this.props._id} handleAddStudentClose={this.handleAddStudentClose}/>
+            </ Dialog>
+          </div>
         </main>
-        <DatePicker />
       </div>
     )
   }
